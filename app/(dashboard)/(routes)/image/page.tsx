@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { amountOptions, imageFormSchema, resolutionOptions } from './constants';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import Image from 'next/image';
 
 const ImagePage = () => {
     const router = useRouter();
@@ -148,7 +149,7 @@ const ImagePage = () => {
                     </Form>
                 </div>
                 <div className='space-y-4 m-4'>
-                    {true && (
+                    {isLoading && (
                         <div className='p-20'>
                             <Loader />
                         </div>
@@ -157,7 +158,11 @@ const ImagePage = () => {
                         <Empty label='No images generated.'/>
                     )}
                     <div>
-                        Images will be rendered here
+                        {images.map((image) => (
+                            <div key={image}>
+                                <img alt="Generated Image" src={image} sizes="auto" />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
