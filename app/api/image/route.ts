@@ -1,6 +1,10 @@
 import { imageFormSchema } from "@/app/(dashboard)/(routes)/image/constants";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+import { number } from "zod";
+
+
 
 export async function POST(req: NextRequest) {
     try {
@@ -10,7 +14,7 @@ export async function POST(req: NextRequest) {
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 });
         }
-
+        
         const body = await req.json();
 
         const validatedFields = imageFormSchema.safeParse(body)
@@ -19,24 +23,25 @@ export async function POST(req: NextRequest) {
             return new NextResponse("Invalid input fields", { status: 400 });
         }
 
-        const { prompt, amount, resolution } = validatedFields.data;
+        const { prompt, amount = "1", resolution = "512x512" } = validatedFields.data;
 
+        const openai = new OpenAI();
 
+        if(!openai.apiKey) {
+            return new NextResponse("OpenAI API Key not configured", { status: 500 });
+        }
 
-        // if(!openai.apiKey) {
-        //     return new NextResponse("OpenAI API Key not configured", { status: 500 });
-        // }
+        console.log("generating images.....")
+        const response = await openai.images.generate(
+            {
+                model: "dall-e-2",
+                prompt: prompt,
+                n: Number.parseInt(amount),
+                size: resolution as "256x256" | "512x512" | "1024x1024"
+            }
+        )
 
-        // if(!messages) {
-        //     return new NextResponse("Messages are required", { status: 400 });
-        // }
-
-        // const response = await openai.chat.completions.create({
-        //     model: "gpt-3.5-turbo",
-        //     messages: messages,
-        // });
-
-        // return NextResponse.json(response.choices[0].message);
+        return NextResponse.json(response.data);
 
     } catch (error) {
         console.log("[IMAGE_ERROR] ", error )
