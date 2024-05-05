@@ -4,18 +4,19 @@ import Empty from '@/components/Empty';
 import Heading from '@/components/Heading';
 import Loader from '@/components/Loader';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { Card, CardFooter } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from "axios";
-import { ImageIcon } from 'lucide-react';
+import { Download, ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { amountOptions, imageFormSchema, resolutionOptions } from './constants';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import Image from 'next/image';
 
 const ImagePage = () => {
     const router = useRouter();
@@ -82,6 +83,7 @@ const ImagePage = () => {
                                             >
                                             </Input>
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -157,11 +159,23 @@ const ImagePage = () => {
                     {images.length === 0 && !isLoading && (
                         <Empty label='No images generated.'/>
                     )}
-                    <div>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8'>
                         {images.map((image) => (
-                            <div key={image}>
-                                <img alt="Generated Image" src={image} sizes="auto" />
-                            </div>
+                            <Card key={image} className='rounded-lg overflow-hidden'>
+                                <div className='relative aspect-square'>
+                                    <Image alt="Generated Image" fill src={image} sizes="auto" />
+                                </div>
+                                <CardFooter className='p-2'>
+                                    <Button 
+                                        variant='secondary' 
+                                        className='w-full'
+                                        onClick={() => window.open(image)}
+                                    >
+                                        <Download className='h-4 w-4 mr-2' />
+                                        Download
+                                    </Button>
+                                </CardFooter>
+                            </Card>
                         ))}
                     </div>
                 </div>

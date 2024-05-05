@@ -2,9 +2,6 @@ import { imageFormSchema } from "@/app/(dashboard)/(routes)/image/constants";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-import { number } from "zod";
-
-
 
 export async function POST(req: NextRequest) {
     try {
