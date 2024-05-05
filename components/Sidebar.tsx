@@ -15,11 +15,17 @@ import {
 } from "lucide-react";
 
 import { usePathname } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
+import FreeCounter from "./FreeCounter";
 
 const monsterrat = Montserrat({weight: "600", subsets: ["latin"]});
 
+interface SidebarProps {
+    apiLimitCount: number,
+    setOpen?: Dispatch<SetStateAction<boolean>>
+}
 
-const Sidebar = (props: any) => {
+const Sidebar = ({ apiLimitCount = 0, setOpen }: SidebarProps) => {
     const pathname = usePathname();
     
     return (
@@ -40,9 +46,9 @@ const Sidebar = (props: any) => {
                                 pathname === route.href ? "bg-white/10" : ""
                              )}
                              onClick={() => {
-                                if (!props.setOpen)
+                                if (!setOpen)
                                     return
-                                props.setOpen(false)
+                                setOpen(false)
                              }}
                         >
                             <div className="flex items-center flex-1">
@@ -55,6 +61,9 @@ const Sidebar = (props: any) => {
                     ))}
                 </div>
             </div>
+            <FreeCounter
+                apiLimitCount={apiLimitCount}
+            />
         </div>
     )
     }
