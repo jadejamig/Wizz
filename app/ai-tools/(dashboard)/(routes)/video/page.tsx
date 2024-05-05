@@ -14,8 +14,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { videoFormSchema } from './constants';
+import UseProModal from '@/hooks/UseProModal';
 
 const VideoPage = () => {
+
+    const proModal = UseProModal();
     const router = useRouter();
     const [video, setVideo] = useState<string>();
 
@@ -38,9 +41,10 @@ const VideoPage = () => {
 
             form.reset();
 
-        } catch (error) {
-            //TODO: Open Pro Modal
-            console.log(error)
+        } catch (error: any) {
+            if (error?.response?.status === 403) {
+                proModal.onOpen();
+            }
         } finally {
             router.refresh()
         }

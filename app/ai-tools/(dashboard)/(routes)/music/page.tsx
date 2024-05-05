@@ -15,8 +15,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { musicFormSchema } from './constants';
+import UseProModal from '@/hooks/UseProModal';
 
 const MusicPage = () => {
+
+    const proModal = UseProModal();
     const router = useRouter();
     const [music, setMusic] = useState<string>();
 
@@ -39,9 +42,10 @@ const MusicPage = () => {
 
             form.reset();
 
-        } catch (error) {
-            //TODO: Open Pro Modal
-            console.log(error)
+        } catch (error: any) {
+            if (error?.response?.status === 403) {
+                proModal.onOpen();
+            }
         } finally {
             router.refresh()
         }
