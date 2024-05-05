@@ -1,4 +1,5 @@
 import { imageFormSchema } from "@/app/ai-tools/(dashboard)/(routes)/image/constants";
+import { checkApiLimit, increaseApiLimit } from "@/lib/apiLimit";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -28,7 +29,12 @@ export async function POST(req: NextRequest) {
             return new NextResponse("OpenAI API Key not configured", { status: 500 });
         }
 
-        console.log("generating images.....")
+        const freeTrial = await checkApiLimit();
+
+        if (!freeTrial) {
+            return new NextResponse("Free trial has expired.", { status: 403 });
+        }
+
         const response = await openai.images.generate(
             {
                 model: "dall-e-2",
@@ -37,6 +43,8 @@ export async function POST(req: NextRequest) {
                 size: resolution as "256x256" | "512x512" | "1024x1024"
             }
         )
+
+        await increaseApiLimit();
 
         return NextResponse.json(response.data);
 

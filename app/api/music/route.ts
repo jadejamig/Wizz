@@ -1,4 +1,5 @@
 import { musicFormSchema } from "@/app/ai-tools/(dashboard)/(routes)/music/constants";
+import { checkApiLimit, increaseApiLimit } from "@/lib/apiLimit";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import Replicate from "replicate";
@@ -36,11 +37,19 @@ export async function POST(req: NextRequest) {
             output_format: "mp3",
             normalization_strategy: "peak"
         };
+
+        const freeTrial = await checkApiLimit();
+
+        if (!freeTrial) {
+            return new NextResponse("Free trial has expired.", { status: 403 });
+        }
         
         const response = await replicate.run(
             "meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb",
             { input }
         );
+
+        await increaseApiLimit();
 
         return NextResponse.json(response)
 
