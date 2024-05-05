@@ -1,4 +1,4 @@
-import { imageFormSchema } from "@/app/(dashboard)/(routes)/image/constants";
+import { imageFormSchema } from "@/app/ai-tools/(dashboard)/(routes)/image/constants";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";

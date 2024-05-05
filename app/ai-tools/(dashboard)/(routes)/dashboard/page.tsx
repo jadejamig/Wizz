@@ -49,12 +49,12 @@ export const tools_list = [
       icon: MessageSquare,
       color: "text-violet-500",
       bgColor: "bg-violet-500/10",
-      href: "/conversation"
+      href: "/ai-tools/conversation"
   },
   {
       label: "Image Generation",
       icon: ImageIcon,
-      href: "/image",
+      href: "/ai-tools/image",
       color: "text-pink-700",
       bgColor: "bg-pink-700/10",
       
@@ -62,21 +62,21 @@ export const tools_list = [
   {
       label: "Video Generation",
       icon: VideoIcon,
-      href: "/video",
+      href: "/ai-tools/video",
       color: "text-orange-700",
       bgColor: "bg-orange-700/10"
   },
   {
       label: "Music Generation",
       icon: MusicIcon,
-      href: "/music",
+      href: "/ai-tools/music",
       color: "text-emerald-500",
       bgColor: "bg-emerald-500/10"
   },
   {
       label: "Code Generation",
       icon: Code,
-      href: "/code",
+      href: "/ai-tools/code",
       color: "text-green-700",
       bgColor: "bg-green-700/10"
   }

@@ -55,7 +55,7 @@ const ImagePage = () => {
         <div>
             <Heading
                 title='Image Generator'
-                description='Turn your prompt into an image.'
+                description='Turn your imagination into an image.'
                 icon={ImageIcon}
                 iconColor='text-pink-700'
                 bgColor='bg-pink-700/10'

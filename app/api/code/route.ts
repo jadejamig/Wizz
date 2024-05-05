@@ -6,7 +6,10 @@ const openai = new OpenAI();
 
 const instructionMessage = {
     role: "system",
-    content: "You are a code generator. The code answers should be in markdown snippets. Also provide explanation of the code."
+    content: `You are an experienced programming assistant bot. 
+            The code you generate should be in markdown snippets. 
+            Other answers can be in normal text. 
+            Also, please provide explanation of the code you generate.`
 }
 
 export async function POST(req: NextRequest) {
