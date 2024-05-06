@@ -78,31 +78,31 @@ export const routes_list = [
         color: "text-sky-500"
     },
     {
-        label: "Conversation",
+        label: "AI Assistant",
         icon: MessageSquare,
         href: "/ai-tools/conversation",
         color: "text-violet-500"
     },
     {
-        label: "Image Generation",
+        label: "Image Model",
         icon: ImageIcon,
         href: "/ai-tools/image",
         color: "text-pink-500"
     },
     {
-        label: "Video Generation",
+        label: "Video Model",
         icon: VideoIcon,
         href: "/ai-tools/video",
         color: "text-orange-700"
     },
     {
-        label: "Music Generation",
+        label: "Music Model",
         icon: MusicIcon,
         href: "/ai-tools/music",
         color: "text-emerald-500"
     },
     {
-        label: "Code Generation",
+        label: "Code Partner",
         icon: Code,
         href: "/ai-tools/code",
         color: "text-green-700"

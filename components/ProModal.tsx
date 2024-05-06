@@ -56,14 +56,14 @@ export default ProModal
 
 export const tools_list = [
     {
-        label: "Conversation",
+        label: "AI Assistant",
         icon: MessageSquare,
         color: "text-violet-500",
         bgColor: "bg-violet-500/10",
         href: "/ai-tools/conversation"
     },
     {
-        label: "Image Generation",
+        label: "Image Model",
         icon: ImageIcon,
         href: "/ai-tools/image",
         color: "text-pink-700",
@@ -71,21 +71,21 @@ export const tools_list = [
         
     },
     {
-        label: "Video Generation",
+        label: "Video Model",
         icon: VideoIcon,
         href: "/ai-tools/video",
         color: "text-orange-700",
         bgColor: "bg-orange-700/10"
     },
     {
-        label: "Music Generation",
+        label: "Music Model",
         icon: MusicIcon,
         href: "/ai-tools/music",
         color: "text-emerald-500",
         bgColor: "bg-emerald-500/10"
     },
     {
-        label: "Code Generation",
+        label: "Code Partner",
         icon: Code,
         href: "/ai-tools/code",
         color: "text-green-700",
