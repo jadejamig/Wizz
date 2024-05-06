@@ -50,11 +50,14 @@ const CodePage = () => {
             };
 
             const newMessages = [...messages, userMessage]
+
+            setMessages((current) => [...current, userMessage as any]);
+
             const response = await axios.post("/api/code", {
                 messages: newMessages
             });
 
-            setMessages((current) => [...current, userMessage, response.data]);
+            setMessages((current) => [...current, response.data]);
 
             form.reset();
 
@@ -140,22 +143,19 @@ const CodePage = () => {
                                                         style={atomOneDarkReasonable} 
                                                         PreTag="div" 
                                                         showLineNumbers
-                                                        useInlineStyles
-                                                        children={
-                                                            new DOMParser().parseFromString(renderToString(children),"text/html").documentElement.textContent as string
-                                                        }
-                                                        
-                                                        />
+                                                        useInlineStyles  
+                                                    >
+                                                        { new DOMParser().parseFromString(renderToString(children),"text/html").documentElement.textContent as string }
+                                                    </SyntaxHighlighter>
                                                 </pre>
                                             </div>
                                         ),
                                         code: ({node, ...props}) => (
                                             <code className='bg-black/10 rounded-sm p-1' {...props} />
-                                        ),
-
+                                        )
                                     }}
 
-                                     className='text-sm overflow-hidden leading-7 whitespace-pre-wrap'
+                                     className='text-sm overflow-hidden leading-7 space-y-4'
                                 >
                                     { message.content as string | null }
                                 </ReactMarkdown>
