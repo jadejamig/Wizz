@@ -3,10 +3,13 @@
 import { useEffect } from "react";
 import { Crisp } from "crisp-sdk-web";
 
-const CrispChat = () => {
+interface CrispChatProps {
+    crisp_id: string
+}
+const CrispChat = ({ crisp_id }: CrispChatProps) => {
 
     useEffect(() => {
-        Crisp.configure("0f524bbc-d32e-43b5-93de-17e3210369de");
+        Crisp.configure(crisp_id);
     }, [])
     
     return null

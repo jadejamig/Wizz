@@ -1,11 +1,13 @@
-"use client";
-
 import CrispChat from "@/components/CrispChat";
 
 const CrispProvider = () => {
-    console.log("YOOOO")
+    const CRISP_WEBSITE_ID = process.env.CRISP_WEBSITE_ID
+
+    if (!CRISP_WEBSITE_ID)
+        return null
+    
     return (
-        <CrispChat/>
+        <CrispChat crisp_id={CRISP_WEBSITE_ID}/>
     )
 }
 
