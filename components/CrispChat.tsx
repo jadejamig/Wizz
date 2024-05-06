@@ -10,7 +10,7 @@ const CrispChat = ({ crisp_id }: CrispChatProps) => {
 
     useEffect(() => {
         Crisp.configure(crisp_id);
-    }, [])
+    }, [crisp_id])
     
     return null
 }

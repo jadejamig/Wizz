@@ -43,7 +43,7 @@ const DashboardPage = () => {
 
 export default DashboardPage
 
-export const tools_list = [
+const tools_list = [
   {
       label: "AI Assistant",
       icon: MessageSquare,
