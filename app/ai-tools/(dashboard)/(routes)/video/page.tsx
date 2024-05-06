@@ -34,13 +34,15 @@ const VideoPage = () => {
     
     const onSubmit = async (values: z.infer<typeof videoFormSchema>) => {
         try {
-            setVideo(undefined);
 
-            const response = await axios.post("/api/video", values);
+            proModal.onOpen();
+            // setVideo(undefined);
 
-            setVideo(response.data[0]);
+            // const response = await axios.post("/api/video", values);
 
-            form.reset();
+            // setVideo(response.data[0]);
+
+            // form.reset();
 
         } catch (error: any) {
             if (error?.response?.status === 403) {

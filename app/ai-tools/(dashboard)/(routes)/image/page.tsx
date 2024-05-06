@@ -39,13 +39,15 @@ const ImagePage = () => {
     
     const onSubmit = async (values: z.infer<typeof imageFormSchema>) => {
         try {
-            setImages([]);
-            const response = await axios.post("/api/image", values);
 
-            const urls = await response.data.map((image: { url: string }) => image.url);
-            setImages(urls);
+            proModal.onOpen();
+            // setImages([]);
+            // const response = await axios.post("/api/image", values);
 
-            form.reset();
+            // const urls = await response.data.map((image: { url: string }) => image.url);
+            // setImages(urls);
+
+            // form.reset();
 
         } catch (error: any) {
             if (error?.response?.status === 403) {
