@@ -1,24 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Wizz: AI SaaS Platform
+
+## Overview
+
+Welcome to the repository of Wizz, your State-of-the-Art AI SaaS Platform! This project aims to provide users with a comprehensive suite of AI tools, including an AI assistant, code helper, image generator, video generator, and music generator. Powered by Next.js 14 App Router, our platform prioritizes efficiency and user-centric design.
+
+## Technologies Used
+
+- **Frontend**: React, Next.js 14 App Router, Tailwind CSS
+- **Backend**: Prisma, PostgreSQL
+- **Authentication**: Clerk
+- **Customer Support**: Crisp Chat
+- **AI Services**: OpenAI, Replicate AI
 
 ## Getting Started
 
-First, run the development server:
+To get started with the project, follow these instructions:
+
+### 1. Install Dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Create Environment File
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env` file in the root directory of the project.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 3. Provide Environment Variables
+
+#### Clerk
+- NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+- CLERK_SECRET_KEY
+
+#### OpenAI
+- OPENAI_API_KEY
+
+#### Replicate AI
+- REPLICATE_API_TOKEN
+
+#### PostgresSQL
+- DATABASE_URL
+- DIRECT_URL
+
+#### Crisp
+- CRISP_WEBSITE_ID
 
 ## Learn More
 
