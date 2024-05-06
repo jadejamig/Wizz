@@ -50,14 +50,12 @@ const CodePage = () => {
             };
 
             const newMessages = [...messages, userMessage]
-
-            setMessages((current) => [...current, userMessage as any]);
-
+            
             const response = await axios.post("/api/code", {
                 messages: newMessages
             });
 
-            setMessages((current) => [...current, response.data]);
+            setMessages((current) => [...current, userMessage, response.data]);
 
             form.reset();
 

@@ -44,15 +44,13 @@ const ComversationPage = () => {
                 content: values.prompt
             };
 
-            setMessages((current) => [...current, userMessage as any]);
-
             const newMessages = [...messages, userMessage]
 
             const response = await axios.post("/api/conversation", {
                 messages: newMessages
             });
 
-            setMessages((current) => [...current, response.data]);
+            setMessages((current) => [...current, userMessage, response.data]);
 
             form.reset();
 
