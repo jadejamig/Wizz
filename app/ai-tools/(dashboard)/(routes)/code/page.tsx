@@ -20,6 +20,11 @@ import { z } from 'zod';
 import { formSchema } from './constants';
 import ReactMarkdown from "react-markdown";
 import UseProModal from '@/hooks/UseProModal';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark, dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { renderToString } from 'react-dom/server';
+import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 const CodePage = () => {
 
@@ -114,7 +119,7 @@ const CodePage = () => {
                     {messages.length === 0 && !isLoading && (
                         <Empty label='No conversations started.'/>
                     )}
-                    <div className='flex flex-col-reverse gap-y-4'>
+                    <div className='flex flex-col-reverse gap-y-4 pb-4'>
                         {messages.map((message, index) => (
                             <div key={index}
                                 className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg",
@@ -124,14 +129,27 @@ const CodePage = () => {
                                 { message.role === "user" ? (<UserAvatar />) : (<BotAvatar />) }
                                 <ReactMarkdown
                                     components={{
-                                        pre: ({node, ...props}) => (
-                                            <div className='overflow-auto w-full bg-black/10 p-10 rounded-lg'>
-                                                <pre {...props} />
+                                        pre: ({children, className, node, ...props}) => (
+                                            <div className='overflow-auto w-full rounded-md'>
+                                                <pre {...props} className=''>
+                                                    <SyntaxHighlighter 
+                                                        language="js" 
+                                                        style={atomOneDarkReasonable} 
+                                                        PreTag="div" 
+                                                        showLineNumbers
+                                                        useInlineStyles
+                                                        children={
+                                                            new DOMParser().parseFromString(renderToString(children),"text/html").documentElement.textContent as string
+                                                        }
+                                                        
+                                                        />
+                                                </pre>
                                             </div>
                                         ),
                                         code: ({node, ...props}) => (
                                             <code className='bg-black/10 rounded-sm p-1' {...props} />
-                                        )
+                                        ),
+
                                     }}
 
                                      className='text-sm overflow-hidden leading-7 whitespace-pre-wrap'

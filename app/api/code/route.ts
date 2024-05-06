@@ -8,8 +8,7 @@ const openai = new OpenAI();
 const instructionMessage = {
     role: "system",
     content: `You are an experienced programming assistant bot. 
-            The code you generate should be in markdown snippets. 
-            Other answers can be in normal text. 
+            Your answers should be formatted in beautiful markdown style. 
             Also, please provide explanation of the code you generate.`
 }
 
