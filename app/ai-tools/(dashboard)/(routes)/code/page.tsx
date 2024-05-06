@@ -25,6 +25,7 @@ import { atomOneDark, dracula } from 'react-syntax-highlighter/dist/esm/styles/h
 import { renderToString } from 'react-dom/server';
 import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import toast from 'react-hot-toast';
 
 const CodePage = () => {
 
@@ -60,6 +61,8 @@ const CodePage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 proModal.onOpen();
+            } else {
+                toast.error("Something went wrong!");
             }
         } finally {
             router.refresh()
@@ -69,7 +72,7 @@ const CodePage = () => {
     return (
         <div>
             <Heading
-                title='Code'
+                title='Code Partner'
                 description='Generate code using descriptive text.'
                 icon={Code}
                 iconColor='text-green-700'

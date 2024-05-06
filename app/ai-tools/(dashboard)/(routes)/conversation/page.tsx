@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { formSchema } from './constants';
 import UseProModal from '@/hooks/UseProModal';
+import toast from 'react-hot-toast';
 
 const ComversationPage = () => {
 
@@ -37,6 +38,7 @@ const ComversationPage = () => {
     
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
+
             const userMessage: ChatCompletionUserMessageParam = {
                 role: "user",
                 content: values.prompt
@@ -54,6 +56,8 @@ const ComversationPage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 proModal.onOpen();
+            } else {
+                toast.error("Something went wrong!");
             }
         } finally {
             router.refresh()
@@ -63,7 +67,7 @@ const ComversationPage = () => {
     return (
         <div>
             <Heading
-                title='Conversation'
+                title='AI Assistant'
                 description='Our most advanced conversation model.'
                 icon={MessageSquare}
                 iconColor='text-violet-500'

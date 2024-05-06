@@ -18,6 +18,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { amountOptions, imageFormSchema, resolutionOptions } from './constants';
 import UseProModal from '@/hooks/UseProModal';
+import toast from 'react-hot-toast';
 
 const ImagePage = () => {
 
@@ -49,6 +50,8 @@ const ImagePage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 proModal.onOpen();
+            } else {
+                toast.error("Something went wrong!");
             }
         } finally {
             router.refresh()
