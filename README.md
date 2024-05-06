@@ -45,6 +45,12 @@ Create a `.env` file in the root directory of the project.
 #### Crisp
 - CRISP_WEBSITE_ID
 
+### 4. Run in dev mode
+
+```bash
+npm run dev
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
