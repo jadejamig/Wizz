@@ -51,6 +51,9 @@ Create a `.env` file in the root directory of the project.
 npm run dev
 ```
 
+## Opportunities
+- History Feature - retain previous prompts
+- Integrate payment - pro subscription
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
