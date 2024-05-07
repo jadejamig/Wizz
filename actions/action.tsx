@@ -17,7 +17,6 @@ export async function continueConversation(messages: CoreMessage[]) {
 
     const result = await streamText({
         model: openai('gpt-4-turbo'),
-        maxTokens: 512,
         messages: [instructionMessage, ...messages]
     })
 
@@ -32,7 +31,6 @@ export async function continueConversationGeneral(messages: CoreMessage[]) {
 
     const result = await streamText({
         model: openai('gpt-4-turbo'),
-        maxTokens: 512,
         messages
     })
 
