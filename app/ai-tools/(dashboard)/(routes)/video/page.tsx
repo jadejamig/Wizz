@@ -36,6 +36,8 @@ const VideoPage = () => {
         try {
 
             proModal.onOpen();
+
+            // UNCOMMENT THIS PART TO ENABLE VIDEO GENERATION
             // setVideo(undefined);
 
             // const response = await axios.post("/api/video", values);

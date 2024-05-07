@@ -13,6 +13,9 @@ const instructionMessage = {
 }
 
 export async function POST(req: NextRequest) {
+    
+    return new NextResponse("This api path is no longer used. See actions folder instead.", { status: 401 });
+
     try {
         const { userId } = auth();
         const body = await req.json();

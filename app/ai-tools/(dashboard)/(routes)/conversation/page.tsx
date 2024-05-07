@@ -1,5 +1,6 @@
 "use client";
 
+import { continueConversationGeneral } from '@/actions/action';
 import BotAvatar from '@/components/BotAvatar';
 import Empty from '@/components/Empty';
 import Heading from '@/components/Heading';
@@ -8,24 +9,27 @@ import UserAvatar from '@/components/UserAvatar';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import UseProModal from '@/hooks/UseProModal';
+import { checkApiLimit } from '@/lib/apiLimit';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from "axios";
+import { type CoreMessage } from 'ai';
+import { readStreamableValue } from 'ai/rsc';
 import { MessageSquare } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { ChatCompletionAssistantMessageParam, ChatCompletionUserMessageParam } from 'openai/resources/index.mjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import ReactMarkdown from "react-markdown";
 import { z } from 'zod';
 import { formSchema } from './constants';
-import UseProModal from '@/hooks/UseProModal';
-import toast from 'react-hot-toast';
 
 const ComversationPage = () => {
 
+    const [messages, setMessages] = useState<CoreMessage[]>([])
+
     const proModal = UseProModal();
     const router = useRouter();
-    const [messages, setMessages] = useState<ChatCompletionAssistantMessageParam[] | ChatCompletionUserMessageParam[]>([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -39,27 +43,37 @@ const ComversationPage = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
 
-            const userMessage: ChatCompletionUserMessageParam = {
+            const freeTrial = await checkApiLimit();
+
+            if (!freeTrial) {
+                proModal.onOpen();
+                return;
+            }
+
+            const userMessage: CoreMessage = {
                 role: "user",
                 content: values.prompt
             };
 
-            const newMessages = [...messages, userMessage]
+            const newMessages: CoreMessage[] = [...messages, userMessage];
+            setMessages(newMessages);
 
-            const response = await axios.post("/api/conversation", {
-                messages: newMessages
-            });
+            const result = await continueConversationGeneral(newMessages);
 
-            setMessages((current) => [...current, userMessage, response.data]);
-
+            for await (const content of readStreamableValue(result)) {
+                setMessages([
+                  ...newMessages,
+                  {
+                    role: 'assistant',
+                    content: content as string
+                  }
+                ])
+              }
+              
             form.reset();
 
         } catch (error: any) {
-            if (error?.response?.status === 403) {
-                proModal.onOpen();
-            } else {
-                toast.error("Something went wrong!");
-            }
+            toast.error("Something went wrong!");
         } finally {
             router.refresh()
         }
@@ -126,8 +140,11 @@ const ComversationPage = () => {
                                  )}
                             >   
                                 { message.role === "user" ? (<UserAvatar />) : (<BotAvatar />) }
+                                
                                 <p className='text-sm whitespace-pre-wrap'>
+                                    <ReactMarkdown>
                                     { message.content as string | null }
+                                    </ReactMarkdown>
                                 </p>
                             </div>
                         ))}

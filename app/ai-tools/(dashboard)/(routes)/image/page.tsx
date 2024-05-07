@@ -41,6 +41,8 @@ const ImagePage = () => {
         try {
 
             proModal.onOpen();
+
+            // UNCOMMENT THIS PART TO ENABLE IMAGE GENERATION
             // setImages([]);
             // const response = await axios.post("/api/image", values);
 

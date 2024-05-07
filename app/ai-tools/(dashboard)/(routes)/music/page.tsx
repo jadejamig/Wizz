@@ -37,6 +37,8 @@ const MusicPage = () => {
         try {
 
             proModal.onOpen();
+
+            // UNCOMMENT THIS PART TO ENABLE MUSIC GENERATION
             // setMusic(undefined);
 
             // const response = await axios.post("/api/music", values);

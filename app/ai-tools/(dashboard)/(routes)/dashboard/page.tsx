@@ -52,6 +52,13 @@ const tools_list = [
       href: "/ai-tools/conversation"
   },
   {
+      label: "Code Partner",
+      icon: Code,
+      href: "/ai-tools/code",
+      color: "text-green-700",
+      bgColor: "bg-green-700/10"
+  },
+  {
       label: "Image Model",
       icon: ImageIcon,
       href: "/ai-tools/image",
@@ -72,12 +79,5 @@ const tools_list = [
       href: "/ai-tools/music",
       color: "text-emerald-500",
       bgColor: "bg-emerald-500/10"
-  },
-  {
-      label: "Code Partner",
-      icon: Code,
-      href: "/ai-tools/code",
-      color: "text-green-700",
-      bgColor: "bg-green-700/10"
   }
 ]

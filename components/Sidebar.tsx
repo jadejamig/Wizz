@@ -84,6 +84,12 @@ export const routes_list = [
         color: "text-violet-500"
     },
     {
+        label: "Code Partner",
+        icon: Code,
+        href: "/ai-tools/code",
+        color: "text-green-700"
+    },
+    {
         label: "Image Model",
         icon: ImageIcon,
         href: "/ai-tools/image",
@@ -101,12 +107,7 @@ export const routes_list = [
         href: "/ai-tools/music",
         color: "text-emerald-500"
     },
-    {
-        label: "Code Partner",
-        icon: Code,
-        href: "/ai-tools/code",
-        color: "text-green-700"
-    },
+
     // {
     //     label: "Settings",
     //     icon: Settings,
