@@ -1,5 +1,7 @@
 # Wizz: AI SaaS Platform
 
+![landing page](/public/landingpage.png)
+
 ## Overview
 
 Welcome to the repository of Wizz, your State-of-the-Art AI SaaS Platform! This project aims to provide users with a comprehensive suite of AI tools, including an AI assistant, code helper, image generator, video generator, and music generator. Powered by Next.js 14 App Router, our platform prioritizes efficiency and user-centric design.
